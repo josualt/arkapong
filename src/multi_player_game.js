@@ -1,8 +1,8 @@
 import Palas from './palas.js';
 
-class ScenePlay extends Phaser.Scene {
+class MultiPlayerGame extends Phaser.Scene {
     constructor () {
-        super({key: "ScenePlay"});
+        super({key: "multi_player_game"});
     }
 
     preload () {
@@ -98,4 +98,4 @@ class ScenePlay extends Phaser.Scene {
     }
 }
 
-export default ScenePlay;
+export default MultiPlayerGame;
