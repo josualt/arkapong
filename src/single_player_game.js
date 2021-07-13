@@ -9,10 +9,14 @@ class SinglePlayerGame extends Phaser.Scene {
 
     create(){
         console.log("single_player_game create")
+        this.add.bitmapText(40, 40, "squareFont","hello single_player_game", 36);
+        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 
     update(){
-        
+        if (this.ESC.isDown) {
+            this.scene.start('menu');
+        }
     }
 }
 

@@ -5,6 +5,8 @@ class Bootloader extends Phaser.Scene {
     }
 
     preload(){
+        this.load.bitmapFont("squareFont", "./assets/fonts/square.png", "./assets/fonts/square.xml");
+
         this.load.on("complete", () => {
             this.scene.start("cinematic");
         })

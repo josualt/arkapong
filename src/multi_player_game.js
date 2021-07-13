@@ -16,6 +16,7 @@ class MultiPlayerGame extends Phaser.Scene {
         const center_height = this.sys.game.config.height/2;
         //separador
         this.add.image(center_width, center_height,  "separador")
+        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         
         this.izquierda = new Palas(this, 30, center_height, "izquierda")
@@ -43,6 +44,10 @@ class MultiPlayerGame extends Phaser.Scene {
     }
 
     update(){
+        if (this.ESC.isDown) {
+            this.scene.start('menu');
+        }
+        
         if(this.ball.x < 0) {
             this.incrementB();
             this.restart();
