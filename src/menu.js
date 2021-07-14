@@ -17,6 +17,7 @@ class Menu extends Phaser.Scene {
         for(let i = 0;i < 4; i++){
             this.add.bitmapText(40, 40 + (50 * i), "squareFont",this.options[i], 36);
         }
+        this.ball = this.physics.add.image(30, 55, "ball");
         this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.input.keyboard.on('keydown-UP', this.menuUp, this);
         this.input.keyboard.on('keydown-DOWN', this.menuDown, this);
@@ -34,6 +35,7 @@ class Menu extends Phaser.Scene {
         }else{
             this.current--;
         }
+        this.ball.y = 55 + (this.current * 50);
         console.log(this.options[this.current], this.current);
     }
 
@@ -43,6 +45,7 @@ class Menu extends Phaser.Scene {
         }else{
             this.current++;
         }
+        this.ball.y = 55 + (this.current * 50);
         console.log(this.options[this.current], this.current);
     }
 }

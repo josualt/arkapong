@@ -14,6 +14,8 @@ class MultiPlayerGame extends Phaser.Scene {
         this.pointsB = 0;
         const center_width = this.sys.game.config.width/2;
         const center_height = this.sys.game.config.height/2;
+        this.pointsAText = this.add.bitmapText(center_width/2, 20, "squareFont", this.pointsA, 36);
+        this.pointsBText = this.add.bitmapText(center_width+(center_width/2), 20, "squareFont", this.pointsB, 36);
         //separador
         this.add.image(center_width, center_height,  "separador")
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
@@ -87,6 +89,7 @@ class MultiPlayerGame extends Phaser.Scene {
 
     incrementA() {
         this.pointsA++;
+        this.pointsAText.setText(this.pointsA);
         if(this.pointsA === 10){
             this.pointsB = 0;
             this.pointsA = 0;
@@ -95,6 +98,7 @@ class MultiPlayerGame extends Phaser.Scene {
     }
     incrementB(){
         this.pointsB++;
+        this.pointsBText.setText(this.pointsB);
         if(this.pointsB === 10){
             this.pointsB = 0;
             this.pointsA = 0;
