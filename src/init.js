@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import Bootloader from './bootloader.js';
 import Cinematic from './cinematic.js';
 import Menu from './menu.js';
