@@ -12,12 +12,14 @@ class MultiPlayerGame extends Phaser.Scene {
     create () {
         this.pointsA = 0;
         this.pointsB = 0;
-        const center_width = this.sys.game.config.width/2;
-        const center_height = this.sys.game.config.height/2;
-        this.pointsAText = this.add.bitmapText(center_width/2, 20, "squareFont", this.pointsA, 36);
-        this.pointsBText = this.add.bitmapText(center_width+(center_width/2), 20, "squareFont", this.pointsB, 36);
+        this.width = this.sys.game.config.width;
+        this.height = this.sys.game.config.height;
+        this.center_width = this.width/2;
+        const center_height = this.height/2;
+        this.pointsAText = this.add.bitmapText(this.center_width/2, 20, "squareFont", this.pointsA, 36);
+        this.pointsBText = this.add.bitmapText(this.center_width+(this.center_width/2), 20, "squareFont", this.pointsB, 36);
         //separador
-        this.add.image(center_width, center_height,  "separador")
+        this.add.image(this.center_width, center_height,  "separador")
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         
@@ -26,11 +28,10 @@ class MultiPlayerGame extends Phaser.Scene {
        this.derecha = new Palas(this, this.sys.game.config.width-30, center_height, "derecha");
         this.physics.world.setBoundsCollision(false, false, true, true)
         //bola
-        this.ball = this.physics.add.image(center_width, center_height, "ball");
+        this.ball = this.physics.add.image(this.center_width, center_height, "ball");
         this.ball.setVelocityX(-180)
         this.ball.setCollideWorldBounds(true);
         this.ball.setBounce(1);
-        this.izquierda.setW
         //fisicas
 
         this.physics.add.collider(this.ball, this.izquierda,this.chocaPala, null, this);
@@ -55,10 +56,9 @@ class MultiPlayerGame extends Phaser.Scene {
         if(this.ball.x < 0) {
             this.incrementB();
             this.restart();
-        } else if (this.ball.x > this.sys.game.config.width){   
+        } else if (this.ball.x > this.width){   
             this.incrementA();
-            this.restart();
-            
+            this.restart();   
         }
 
         //control de las palas
@@ -67,24 +67,27 @@ class MultiPlayerGame extends Phaser.Scene {
             this.derecha.body.setVelocityY(300);
         } else if(this.cursor.up.isDown) {
             this.derecha.body.setVelocityY(-300)
-        } else if(this.cursor.right.isDown) {
+        } else if(this.cursor.right.isDown && this.derecha.body.x < this.width - 5) {
             this.derecha.body.setVelocityX(300)
-        } else if(this.cursor.left.isDown) {
+        } else if(this.cursor.left.isDown && this.derecha.body.x > this.center_width+(this.center_width/2)) {
             this.derecha.body.setVelocityX(-300)
         } else {
             this.derecha.body.setVelocityY(0)
+            this.derecha.body.setVelocityX(0)
         }
+
         //Pala izquierda
         if(this.cursor_S.isDown){
-        this.izquierda.body.setVelocityY(300);
+            this.izquierda.body.setVelocityY(300);
         }else if(this.cursor_W.isDown){
-        this.izquierda.body.setVelocityY(-300);
-        }else if(this.cursor_D.isDown){
-        this.izquierda.body.setVelocityX(300);
-        }else if(this.cursor_A.isDown){
-        this.izquierda.body.setVelocityX(-300);
+            this.izquierda.body.setVelocityY(-300);
+        }else if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
+            this.izquierda.body.setVelocityX(300);
+        }else if(this.cursor_A.isDown && this.izquierda.body.x > 0){
+            this.izquierda.body.setVelocityX(-300);
         }else {
             this.izquierda.body.setVelocityY(0)
+            this.izquierda.body.setVelocityX(0)
         }
     }
 
@@ -95,6 +98,7 @@ class MultiPlayerGame extends Phaser.Scene {
     restart(){
         console.log(this.pointsA, this.pointsB);
         this.ball.setPosition(this.sys.game.config.width/2, this.sys.game.config.height/2);
+        this.ball.setVelocityX(-180)
     }
 
     incrementA() {
