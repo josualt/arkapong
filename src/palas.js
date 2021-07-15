@@ -4,7 +4,7 @@ class Palas extends Phaser.GameObjects.Sprite {
         scene.add.existing(this)
         scene.physics.world.enable(this);
         this.body.immovable = true;
-        this.body.setCollideWorldBounds(true)
+        this.body.setCollideWorldBounds(true);
     }
 }
 

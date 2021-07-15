@@ -30,7 +30,7 @@ class MultiPlayerGame extends Phaser.Scene {
         this.ball.setVelocityX(-180)
         this.ball.setCollideWorldBounds(true);
         this.ball.setBounce(1);
-
+        this.izquierda.setW
         //fisicas
 
         this.physics.add.collider(this.ball, this.izquierda,this.chocaPala, null, this);
@@ -43,6 +43,8 @@ class MultiPlayerGame extends Phaser.Scene {
         //pala izquierda
         this.cursor_W = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.cursor_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.cursor_A = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.cursor_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     }
 
     update(){
@@ -65,14 +67,22 @@ class MultiPlayerGame extends Phaser.Scene {
             this.derecha.body.setVelocityY(300);
         } else if(this.cursor.up.isDown) {
             this.derecha.body.setVelocityY(-300)
+        } else if(this.cursor.right.isDown) {
+            this.derecha.body.setVelocityX(300)
+        } else if(this.cursor.left.isDown) {
+            this.derecha.body.setVelocityX(-300)
         } else {
             this.derecha.body.setVelocityY(0)
         }
         //Pala izquierda
         if(this.cursor_S.isDown){
-            this.izquierda.body.setVelocityY(300);
+        this.izquierda.body.setVelocityY(300);
         }else if(this.cursor_W.isDown){
-            this.izquierda.body.setVelocityY(-300);
+        this.izquierda.body.setVelocityY(-300);
+        }else if(this.cursor_D.isDown){
+        this.izquierda.body.setVelocityX(300);
+        }else if(this.cursor_A.isDown){
+        this.izquierda.body.setVelocityX(-300);
         }else {
             this.izquierda.body.setVelocityY(0)
         }
