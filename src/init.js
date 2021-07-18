@@ -12,7 +12,8 @@ const config = {
     height: 400,
     parent: "contenedor",
     physics: {
-        default: "arcade"
+        default: "arcade",
+        debug: true,
     },
     scene: [
         Bootloader,

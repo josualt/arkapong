@@ -64,30 +64,36 @@ class MultiPlayerGame extends Phaser.Scene {
         //control de las palas
         //pala derecha
         if(this.cursor.down.isDown){
-            this.derecha.body.setVelocityY(300);
-        } else if(this.cursor.up.isDown) {
-            this.derecha.body.setVelocityY(-300)
-        } else if(this.cursor.right.isDown && this.derecha.body.x < this.width - 5) {
-            this.derecha.body.setVelocityX(300)
-        } else if(this.cursor.left.isDown && this.derecha.body.x > this.center_width+(this.center_width/2)) {
-            this.derecha.body.setVelocityX(-300)
-        } else {
-            this.derecha.body.setVelocityY(0)
-            this.derecha.body.setVelocityX(0)
+            this.derecha.body.y += 3;
         }
+ 
+        if(this.cursor.up.isDown) {
+            this.derecha.body.y -= 3;
+        } 
+        
+        if(this.cursor.right.isDown && this.derecha.body.x <= this.width - 10) {
+            this.derecha.body.x += 3;
+        } 
+        
+        if(this.cursor.left.isDown && this.derecha.body.x >= this.center_width+(this.center_width/2) - 10) {
+            this.derecha.body.x -= 3;
+        } 
 
         //Pala izquierda
         if(this.cursor_S.isDown){
-            this.izquierda.body.setVelocityY(300);
-        }else if(this.cursor_W.isDown){
-            this.izquierda.body.setVelocityY(-300);
-        }else if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
-            this.izquierda.body.setVelocityX(300);
-        }else if(this.cursor_A.isDown && this.izquierda.body.x > 0){
-            this.izquierda.body.setVelocityX(-300);
-        }else {
-            this.izquierda.body.setVelocityY(0)
-            this.izquierda.body.setVelocityX(0)
+            this.izquierda.body.y += 3;
+        }
+        
+        if(this.cursor_W.isDown){
+            this.izquierda.body.y -= 3;
+        }
+        
+        if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
+            this.izquierda.body.x += 3;
+        }
+        
+        if(this.cursor_A.isDown && this.izquierda.body.x > 0){
+            this.izquierda.body.x -= 3;
         }
     }
 
