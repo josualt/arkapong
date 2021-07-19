@@ -12,11 +12,11 @@ class Bootloader extends Phaser.Scene {
         })
         
         this.load.image("ball", "./assets/images/ball.png");
-        this.load.image("izquierda", "./assets/images/left_pallete.png");
-        this.load.image("derecha", "./assets/images/right_pallete.png");
+        this.load.image("izquierda", "./assets/images/paddle.png");
+        this.load.image("derecha", "./assets/images/paddle.png");
         this.load.image("separador", "./assets/images/separator.png");
-        
-    }
+        this.load.image("block", "./assets/images/block.png");
+        }
     }
 
 

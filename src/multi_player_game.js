@@ -1,4 +1,6 @@
 import Palas from './palas.js';
+import BlockCreator from './block_creator';
+
 
 class MultiPlayerGame extends Phaser.Scene {
     constructor () {
@@ -25,7 +27,7 @@ class MultiPlayerGame extends Phaser.Scene {
         
         this.izquierda = new Palas(this, 30, center_height, "izquierda")
        
-       this.derecha = new Palas(this, this.sys.game.config.width-30, center_height, "derecha");
+        this.derecha = new Palas(this, this.sys.game.config.width-30, center_height, "derecha");
         this.physics.world.setBoundsCollision(false, false, true, true)
         //bola
         this.ball = this.physics.add.image(this.center_width, center_height, "ball");
@@ -33,9 +35,13 @@ class MultiPlayerGame extends Phaser.Scene {
         this.ball.setCollideWorldBounds(true);
         this.ball.setBounce(1);
         //fisicas
-
-        this.physics.add.collider(this.ball, this.izquierda,this.chocaPala, null, this);
-        this.physics.add.collider(this.ball, this.derecha,this.chocaPala, null, this);
+        this.blockCreator = new BlockCreator(this);
+        this.blockCreator.generate();
+        this.rectangle = new Phaser.GameObjects.Rectangle(this,this.center_width, center_height, 60, 20, 0xff0000)
+        this.physics.add.existing(this.rectangle);
+        this.physics.add.collider(this.ball, this.izquierda, this.chocaPala, null, this);
+        this.physics.add.collider(this.ball, this.derecha, this.chocaPala, null, this);
+       
         
         //Controles
         //pala derecha
@@ -76,7 +82,13 @@ class MultiPlayerGame extends Phaser.Scene {
         } 
         
         if(this.cursor.left.isDown && this.derecha.body.x >= this.center_width+(this.center_width/2) - 10) {
-            this.derecha.body.x -= 3;
+            //this.derecha.body.x -= 3;
+            this.derecha.body.setVelocityX(-200)
+        } 
+
+        if(this.cursor.left.isUp || this.derecha.body.x < this.center_width+(this.center_width/2) - 10) {
+            //this.derecha.body.x -= 3;
+            this.derecha.body.setVelocityX(0);
         } 
 
         //Pala izquierda
@@ -89,8 +101,14 @@ class MultiPlayerGame extends Phaser.Scene {
         }
         
         if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
-            this.izquierda.body.x += 3;
+          //this.izquierda.body.x += 3;
+            this.izquierda.body.setVelocityX(200)
         }
+
+        if(this.cursor_D.isUp || this.izquierda.body.x >= this.center_width/2){
+            //this.izquierda.body.x += 3;
+              this.izquierda.body.setVelocityX(0);
+          }
         
         if(this.cursor_A.isDown && this.izquierda.body.x > 0){
             this.izquierda.body.x -= 3;
