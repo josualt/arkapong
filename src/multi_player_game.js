@@ -56,6 +56,7 @@ class MultiPlayerGame extends Phaser.Scene {
 
     update(){
         if (this.ESC.isDown) {
+            this.blockCreator.stop();
             this.scene.start('menu');
         }
         
