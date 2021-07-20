@@ -34,6 +34,7 @@ class MultiPlayerGame extends Phaser.Scene {
         this.ball.setVelocityX(-180)
         this.ball.setCollideWorldBounds(true);
         this.ball.setBounce(1);
+        this.restart();
         //fisicas
         this.blockCreator = new BlockCreator(this);
         this.blockCreator.generate();
@@ -116,14 +117,21 @@ class MultiPlayerGame extends Phaser.Scene {
         }
     }
 
-    chocaPala() {
-        this.ball.setVelocityY(Phaser.Math.Between(-120, 120))
+    chocaPala(ball, paddle) {
+        const hitPoint = paddle.y - ball.y
+        console.log(ball.y, paddle.y, paddle.y - ball.y );
+        if(hitPoint < 2 && hitPoint > -2){
+            this.ball.setVelocityY(0)
+        } else{
+            this.ball.setVelocityY(-hitPoint * 5);
+        }
     }
 
     restart(){
         console.log(this.pointsA, this.pointsB);
         this.ball.setPosition(this.sys.game.config.width/2, this.sys.game.config.height/2);
         this.ball.setVelocityX(-180)
+        this.ball.setVelocityY(Phaser.Math.Between(-150, 150));
     }
 
     incrementA() {
