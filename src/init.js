@@ -8,8 +8,13 @@ import Settings from './settings.js';
 import Help from './help.js'
 
 const config = {
-    width: 640,
-    height: 400,
+    width: 800,
+    height: 600,
+    scale:{
+        mode: Phaser.Scale.ENVELOP,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
+    autoRound: false,
     parent: "contenedor",
     physics: {
         default: "arcade",

@@ -9,14 +9,22 @@ class Menu extends Phaser.Scene {
     }
 
     create(){
+        this.width = this.sys.game.config.width;
+        this.height = this.sys.game.config.height;
+        this.center_width = this.width/2;
+        const center_height = this.height/2;
         console.log("menu create");
         this.options = ["one player", "two player", "settings", "help"];
         this.scenes = ["single_player_game", "multi_player_game", "settings", "help"];
         this.current = 0;
-
+        this.texts = [];
         for(let i = 0;i < 4; i++){
-            this.add.bitmapText(40, 40 + (50 * i), "squareFont",this.options[i], 36);
+            this.texts.push(this.add.bitmapText(this.center_width, 40 + (50 * i), "squareFont",this.options[i], 36).setOrigin(0.5));
         }
+
+        this.texts[0].tint = 0xff0000;
+        this.texts[0].backgroundColor = 0xffffff;
+        this.texts[0].setScale(1.2,1.2)
         this.ball = this.physics.add.image(30, 55, "ball");
         this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.input.keyboard.on('keydown-UP', this.menuUp, this);

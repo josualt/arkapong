@@ -21,7 +21,7 @@ class MultiPlayerGame extends Phaser.Scene {
         this.pointsAText = this.add.bitmapText(this.center_width/2, 20, "squareFont", this.pointsA, 36);
         this.pointsBText = this.add.bitmapText(this.center_width+(this.center_width/2), 20, "squareFont", this.pointsB, 36);
         //separador
-        this.add.image(this.center_width, center_height,  "separador")
+        this.add.tileSprite(this.center_width, center_height, 1, this.height, "separador")
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         
