@@ -9,9 +9,9 @@ import Help from './help.js'
 
 const config = {
     width: 800,
-    height: 600,
+    height: 500,
     scale:{
-        mode: Phaser.Scale.ENVELOP,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     autoRound: false,

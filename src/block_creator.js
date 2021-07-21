@@ -11,10 +11,8 @@ class BlockCreator{
         this.blocks = [];
     }
 
-
-
     generate(){
-        console.log("i am here!!!")
+        console.log("Block generator!!!")
         this.generator = setInterval(() => this.spawn(), 5000 + Phaser.Math.Between(1000, 5000));
     }
 
