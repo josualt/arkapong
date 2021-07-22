@@ -17,15 +17,16 @@ class Menu extends Phaser.Scene {
         this.options = ["one player", "two player", "settings", "help"];
         this.scenes = ["single_player_game", "multi_player_game", "settings", "help"];
         this.current = 0;
+        this.add.bitmapText(this.center_width, 50 , "squareFont","ARKAPONG", 60).setOrigin(0.5);
+        const layer = this.add.layer();
+        this.rectangle = new Phaser.GameObjects.Rectangle(this, this.center_width, 150, this.width, 40, 0xffffff).setOrigin(0.5);
+        layer.add(this.rectangle);
         this.texts = [];
         for(let i = 0;i < 4; i++){
-            this.texts.push(this.add.bitmapText(this.center_width, 40 + (50 * i), "squareFont",this.options[i], 36).setOrigin(0.5));
+            this.texts.push(this.add.bitmapText(this.center_width, 150 + (50 * i), "squareFont",this.options[i], 36).setOrigin(0.5));
         }
 
-        this.texts[0].tint = 0xff0000;
-        this.texts[0].backgroundColor = 0xffffff;
-        this.texts[0].setScale(1.2,1.2)
-        this.ball = this.physics.add.image(30, 55, "ball");
+        this.texts[0].tint = 0x000000;
         this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.input.keyboard.on('keydown-UP', this.menuUp, this);
         this.input.keyboard.on('keydown-DOWN', this.menuDown, this);
@@ -38,22 +39,26 @@ class Menu extends Phaser.Scene {
     }
 
     menuUp(){
+        this.texts[this.current].tint = 0xffffff;
         if(this.current === 0){
             this.current = this.options.length -1;
         }else{
             this.current--;
         }
-        this.ball.y = 55 + (this.current * 50);
+        this.texts[this.current].tint = 0x000000;
+        this.rectangle.y = 150 + (this.current * 50);
         console.log(this.options[this.current], this.current);
     }
 
     menuDown(){
+        this.texts[this.current].tint = 0xffffff;
         if(this.current === this.options.length -1){
             this.current = 0;
         }else{
             this.current++;
         }
-        this.ball.y = 55 + (this.current * 50);
+        this.texts[this.current].tint = 0x000000;
+        this.rectangle.y = 150 + (this.current * 50);
         console.log(this.options[this.current], this.current);
     }
 }
