@@ -14,6 +14,10 @@ class Menu extends Phaser.Scene {
         this.center_width = this.width/2;
         const center_height = this.height/2;
         console.log("menu create");
+        this.add.image(700, 430, "helpB").setScale(0.5)
+        this.add.image(95, 430, "helpA").setScale(0.5)
+        this.add.image(300, 430, "pressEnter").setScale(0.5)
+        this.add.image(500, 430, "pressEsc").setScale(0.5)
         this.options = ["one player", "two player", "settings", "help"];
         this.scenes = ["single_player_game", "multi_player_game", "settings", "help"];
         this.current = 0;
