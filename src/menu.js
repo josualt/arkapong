@@ -9,6 +9,7 @@ class Menu extends Phaser.Scene {
     }
 
     create(){
+        console.log(this.registry.get("ballSpeed"),this.registry.get("paddleSpeed"),this.registry.get("winScore") );
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
         this.center_width = this.width/2;

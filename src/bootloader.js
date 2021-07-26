@@ -21,6 +21,10 @@ class Bootloader extends Phaser.Scene {
         this.load.image("block", "./assets/images/block.png");
         this.load.image("pressEnter", "./assets/images/enter_button.png");
         this.load.image("pressEsc", "./assets/images/esc_button.png");
+
+        this.registry.set("ballSpeed", 2);
+        this.registry.set("paddleSpeed", 3);
+        this.registry.set("winScore", 2);
     }
 }
 

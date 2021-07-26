@@ -12,6 +12,9 @@ class MultiPlayerGame extends Phaser.Scene {
     }
     
     create () {
+        console.log(this.registry.get("ballSpeed"),this.registry.get("paddleSpeed"),this.registry.get("winScore") );
+
+  
         this.pointsA = 0;
         this.pointsB = 0;
         this.points = 3;

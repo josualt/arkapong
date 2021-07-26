@@ -2,6 +2,7 @@ class Help extends Phaser.Scene {
     constructor(){
         super({key: "help"});
     
+
     }
 
     preload(){
@@ -11,7 +12,7 @@ class Help extends Phaser.Scene {
     create(){
         console.log("help create")
         this.add.bitmapText(300, 40, "squareFont","information", 36);
-        this.add.bitmapText(255, 200, "squareFont","block abilities ", 36);
+        this.add.bitmapText(255, 200, "squareFont","block abilities", 36);
         this.add.bitmapText(295, 350, "squareFont","controls", 36);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
