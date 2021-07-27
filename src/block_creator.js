@@ -1,8 +1,10 @@
 import WhiteBlock from './white_block';
 import blockTypes from './block_types';
-import GreenBlock from './white_block';
-import BlueBlock from './white_block';
-import RedBlock from './white_block';
+import GreenBlock from './red_block';
+import BlueBlock from './blue_block';
+import RedBlock from './green_block';
+import OrangeBlock from './orange_block';
+import PinkBlock from './pink_block';
 
 class BlockCreator{
 
@@ -13,12 +15,12 @@ class BlockCreator{
 
     generate(){
         console.log("Block generator!!!")
-        this.generator = setInterval(() => this.spawn(), 5000 + Phaser.Math.Between(1000, 5000));
+        this.generator = setInterval(() => this.spawn(), 1 + Phaser.Math.Between(1000, 5000));
     }
 
     spawn(){
         console.log("new block");
-        const blockType = blockTypes[Phaser.Math.Between(0, 3)];
+        const blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length -1)];
         const x = Phaser.Math.Between(250, 450)
         const y = Phaser.Math.Between(0, 390)
 
@@ -34,6 +36,12 @@ class BlockCreator{
                 break;
             case "red":
                 this.blocks.push(new RedBlock(this.scene, x, y, blockType.color));
+                break
+            case "orange":
+                this.blocks.push(new OrangeBlock(this.scene, x, y, blockType.color));
+                break;
+            case "pink":
+                this.blocks.push(new PinkBlock(this.scene, x, y, blockType.color));
                 break;
         }
     }

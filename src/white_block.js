@@ -6,7 +6,7 @@ class WhiteBlock extends Block{
     }
 
     touch(){
-        console.log("booOOOoom", this.scene.izquierda);
+        console.log("white", this.scene.izquierda);
         this.scene.izquierda.setScale(1, 2);
         this.destroy();
     }

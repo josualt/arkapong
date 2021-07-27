@@ -6,7 +6,7 @@ class GreenBlock extends Block{
     }
 
     touch(){
-        console.log("booOOOoom", this.scene.izquierda);
+        console.log("green", this.scene.izquierda);
         this.scene.izquierda.setScale(1, 2);
         this.destroy();
     }
