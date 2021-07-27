@@ -11,11 +11,19 @@ class Help extends Phaser.Scene {
 
     create(){
         console.log("help create")
-        this.add.bitmapText(300, 40, "squareFont","information", 36);
-        this.add.bitmapText(255, 200, "squareFont","block abilities", 36);
-        this.add.bitmapText(295, 350, "squareFont","controls", 36);
-        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
+        const helpText = "bla bla bla bla";
+
+        this.width = this.sys.game.config.width;
+        this.height = this.sys.game.config.height;
+        this.center_width = this.width/2;
+        this.add.bitmapText(this.center_width, 50 , "squareFont","ARKAPONG", 60).setOrigin(0.5);
+        this.add.bitmapText(this.center_width, 110 , "squareFont","Help", 40).setOrigin(0.5);
+        this.add.bitmapText(this.center_width, 150, "squareFont","information", 36).setOrigin(0.5);
+        this.add.bitmapText(this.center_width, 180, "squareFont",helpText, 16).setOrigin(0.5);
+        this.add.bitmapText(this.center_width, 350, "squareFont","controls", 36).setOrigin(0.5);
+
+        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         this.add.image(700, 440, "helpB").setScale(0.5)
         this.add.image(95, 440, "helpA").setScale(0.5)
         this.add.image(300, 450, "pressEnter").setScale(0.5)
