@@ -57,6 +57,10 @@ class Settings extends Phaser.Scene {
         this.input.keyboard.on('keydown-DOWN', this.menuDown, this);
         this.input.keyboard.on('keydown-RIGHT', this.menuRight, this);
         this.input.keyboard.on('keydown-LEFT', this.menuLeft, this);
+        this.input.keyboard.on('keydown-W', this.menuUp, this);
+        this.input.keyboard.on('keydown-S', this.menuDown, this);
+        this.input.keyboard.on('keydown-D', this.menuRight, this);
+        this.input.keyboard.on('keydown-A', this.menuLeft, this);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 

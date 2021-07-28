@@ -35,6 +35,8 @@ class Menu extends Phaser.Scene {
         this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.input.keyboard.on('keydown-UP', this.menuUp, this);
         this.input.keyboard.on('keydown-DOWN', this.menuDown, this);
+        this.input.keyboard.on('keydown-W', this.menuUp, this);
+        this.input.keyboard.on('keydown-S', this.menuDown, this);
     }
 
     update(){
