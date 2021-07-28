@@ -14,6 +14,7 @@ class BlockCreator{
     }
 
     generate(){
+        this.reset();
         console.log("Block generator!!!")
         this.generator = setInterval(() => this.spawn(), 1 + Phaser.Math.Between(1000, 5000));
     }
@@ -45,9 +46,15 @@ class BlockCreator{
                 break;
         }
     }
+
     stop(){
         clearInterval(this.generator);
     }
+
+    reset() {
+        this.blocks.forEach(block => {block.destroy();});
+        this.blocks = [];
+    } 
 }
 
 export default BlockCreator;

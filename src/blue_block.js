@@ -7,7 +7,13 @@ class BlueBlock extends Block{
 
     touch(){
         console.log("booOOOoom", this.scene.izquierda);
-        this.scene.izquierda.setScale(1, 0.5);
+        
+        if (this.affectsPlayerA) {
+            this.scene.izquierda.setScale(1, 0.5);
+        } else {
+            this.scene.derecha.setScale(1, 0.5);
+        }
+
         this.destroy();
     }
 }

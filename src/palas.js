@@ -6,6 +6,11 @@ class Palas extends Phaser.GameObjects.Sprite {
         this.body.immovable = true;
         this.body.setCollideWorldBounds(true);
     }
+
+    reset () {
+        this.setScale(1, 1);
+        this.body.x;
+    }
 }
 
 export default Palas;

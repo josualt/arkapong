@@ -17,7 +17,7 @@ class MultiPlayerGame extends Phaser.Scene {
   
         this.pointsA = 0;
         this.pointsB = 0;
-        this.points = 3;
+        this.points = 10; // this.registry.get("");
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
         this.center_width = this.width/2;
@@ -38,12 +38,11 @@ class MultiPlayerGame extends Phaser.Scene {
         this.physics.world.setBoundsCollision(false, false, true, true)
         //bola
         this.balls = [];
-
-        this.restartGame();
         //fisicas
         this.blockCreator = new BlockCreator(this);
-        this.blockCreator.generate();    
-        
+
+        this.restartGame();
+
         //Controles
         //pala derecha
         this.cursor = this.input.keyboard.createCursorKeys();
@@ -64,29 +63,25 @@ class MultiPlayerGame extends Phaser.Scene {
         }
         
         if(this.pointsA === this.points || this.pointsB === this.points){
-            
             this.blockCreator.stop();
             this.showResult();
             if(this.ENTER.isDown){
                 this.restartGame();
             }
         } else {
-            this.balls.forEach(ball =>{
-                if(ball.x < 0) {
+            for (let i = 0; i < this.balls.length; i++) {
+                if(this.balls[i].x < 0) {
+                    this.balls[i].destroy();
+                    this.balls[i] = null;
                     this.incrementB();
-                    if (this.balls.length > 1){
-                        ball.destroy();
-                    }
-                    this.restart();
-                } else if (ball.x > this.width){   
-                    this.incrementA();
-                    if (this.balls.length > 1){
-                        ball.destroy();
-                    }
-                    this.restart();   
+                } else if (this.balls[i].x > this.width){   
+                    this.balls[i].destroy();
+                    this.balls[i] = null;
+                    this.incrementA();  
                 }
-            })
-         
+            }
+            this.balls = this.balls.filter(ball => ball !== null);
+            if (this.balls.length === 0) this.restart();
     
             //control de las palas
             //pala derecha
@@ -122,12 +117,10 @@ class MultiPlayerGame extends Phaser.Scene {
             }
             
             if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
-              //this.izquierda.body.x += 3;
                 this.izquierda.body.setVelocityX(200)
             }
     
             if(this.cursor_D.isUp || this.izquierda.body.x >= this.center_width/2){
-                //this.izquierda.body.x += 3;
                   this.izquierda.body.setVelocityX(0);
               }
             
@@ -150,12 +143,10 @@ class MultiPlayerGame extends Phaser.Scene {
     }
 
     restart(){
-        if(this.pointsA < this.points && this.pointsB < this.points && this.balls.length === 1){
+        this.blockCreator.reset();
+        if(this.pointsA < this.points && this.pointsB < this.points){
             console.log(this.pointsA, this.pointsB);
-            
-            this.balls[0].setPosition(this.sys.game.config.width/2, this.sys.game.config.height/2);
-            this.balls[0].setVelocityX(-180)
-            this.balls[0].setVelocityY(Phaser.Math.Between(-150, 150));
+            this.createBall();
         }
     }
 
@@ -175,9 +166,11 @@ class MultiPlayerGame extends Phaser.Scene {
         this.continueMessage.setText("press ENTER to play again ESC to quit");
     }
     
-    createBall(){
+    createBall(velocityX = -180){
         const ball = this.physics.add.image(this.center_width, this.center_height, "ball");
-        ball.setVelocityX(-180)
+        ball.x = this.center_width;
+        ball.setVelocityX(velocityX)
+        ball.setVelocityY(Phaser.Math.Between(-150, 150));
         ball.setCollideWorldBounds(true);
         ball.setBounce(1);
 
@@ -187,18 +180,17 @@ class MultiPlayerGame extends Phaser.Scene {
     }
 
     restartGame(){
+        this.blockCreator.generate();
         this.balls = [];
         this.createBall();
         console.log("restart game", this.pointsA, this.pointsB);
         this.resultMessage.setText("");
         this.continueMessage.setText("");
-        this.balls[0].x = this.center_width;
         this.pointsA = 0;
         this.pointsB = 0;
         this.pointsAText.setText(this.pointsA);
         this.pointsBText.setText(this.pointsB);
         console.log("lets go", this.pointsA, this.pointsB);
-        this.restart();
     }
 }
 

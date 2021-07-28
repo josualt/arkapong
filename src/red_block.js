@@ -7,7 +7,7 @@ class RedBlock extends Block{
 
     touch(){
         console.log("red");
-        this.scene.balls[0].setScale(2, 2);
+        this.scene.balls.forEach(ball => ball.setScale(2, 2));
         this.destroy();
     }
 }

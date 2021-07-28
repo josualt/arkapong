@@ -8,11 +8,12 @@ class Block extends Phaser.GameObjects.Sprite{
         this.body.bounce = 1;
         this.body.immovable = true;
         this.tint = color;
+        this.affectsPlayerA = x < this.scene.center_width;
     }
 
     log () {
         console.log("Im generic");
-    }
+    } 
 }
 
 export default Block;
