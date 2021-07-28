@@ -37,19 +37,12 @@ class MultiPlayerGame extends Phaser.Scene {
         this.derecha = new Palas(this, this.sys.game.config.width-30, this.center_height, "derecha");
         this.physics.world.setBoundsCollision(false, false, true, true)
         //bola
-        this.ball = this.physics.add.image(this.center_width, this.center_height, "ball");
-        this.ball.setVelocityX(-180)
-        this.ball.setCollideWorldBounds(true);
-        this.ball.setBounce(1);
-        this.restart();
+        this.balls = [];
+
+        this.restartGame();
         //fisicas
         this.blockCreator = new BlockCreator(this);
-        this.blockCreator.generate();
-        this.rectangle = new Phaser.GameObjects.Rectangle(this,this.center_width, this.center_height, 60, 20, 0xff0000)
-        this.physics.add.existing(this.rectangle);
-        this.physics.add.collider(this.ball, this.izquierda, this.chocaPala, null, this);
-        this.physics.add.collider(this.ball, this.derecha, this.chocaPala, null, this);
-       
+        this.blockCreator.generate();    
         
         //Controles
         //pala derecha
@@ -78,13 +71,22 @@ class MultiPlayerGame extends Phaser.Scene {
                 this.restartGame();
             }
         } else {
-            if(this.ball.x < 0) {
-                this.incrementB();
-                this.restart();
-            } else if (this.ball.x > this.width){   
-                this.incrementA();
-                this.restart();   
-            }
+            this.balls.forEach(ball =>{
+                if(ball.x < 0) {
+                    this.incrementB();
+                    if (this.balls.length > 1){
+                        ball.destroy();
+                    }
+                    this.restart();
+                } else if (ball.x > this.width){   
+                    this.incrementA();
+                    if (this.balls.length > 1){
+                        ball.destroy();
+                    }
+                    this.restart();   
+                }
+            })
+         
     
             //control de las palas
             //pala derecha
@@ -141,18 +143,19 @@ class MultiPlayerGame extends Phaser.Scene {
         const hitPoint = paddle.y - ball.y
         console.log(ball.y, paddle.y, paddle.y - ball.y );
         if(hitPoint < 2 && hitPoint > -2){
-            this.ball.setVelocityY(0)
+            ball.setVelocityY(0)
         } else{
-            this.ball.setVelocityY(-hitPoint * 5);
+            ball.setVelocityY(-hitPoint * 5);
         }
     }
 
     restart(){
-        if(this.pointsA < this.points && this.pointsB < this.points){
+        if(this.pointsA < this.points && this.pointsB < this.points && this.balls.length === 1){
             console.log(this.pointsA, this.pointsB);
-            this.ball.setPosition(this.sys.game.config.width/2, this.sys.game.config.height/2);
-            this.ball.setVelocityX(-180)
-            this.ball.setVelocityY(Phaser.Math.Between(-150, 150));
+            
+            this.balls[0].setPosition(this.sys.game.config.width/2, this.sys.game.config.height/2);
+            this.balls[0].setVelocityX(-180)
+            this.balls[0].setVelocityY(Phaser.Math.Between(-150, 150));
         }
     }
 
@@ -171,17 +174,31 @@ class MultiPlayerGame extends Phaser.Scene {
         this.resultMessage.setText(message);
         this.continueMessage.setText("press ENTER to play again ESC to quit");
     }
+    
+    createBall(){
+        const ball = this.physics.add.image(this.center_width, this.center_height, "ball");
+        ball.setVelocityX(-180)
+        ball.setCollideWorldBounds(true);
+        ball.setBounce(1);
+
+        this.physics.add.collider(ball, this.izquierda, this.chocaPala, null, this);
+        this.physics.add.collider(ball, this.derecha, this.chocaPala, null, this);
+        this.balls.push(ball);
+    }
+
     restartGame(){
+        this.balls = [];
+        this.createBall();
         console.log("restart game", this.pointsA, this.pointsB);
         this.resultMessage.setText("");
         this.continueMessage.setText("");
-        this.ball.x = this.center_width;
+        this.balls[0].x = this.center_width;
         this.pointsA = 0;
         this.pointsB = 0;
         this.pointsAText.setText(this.pointsA);
         this.pointsBText.setText(this.pointsB);
         console.log("lets go", this.pointsA, this.pointsB);
-        this.blockCreator.generate();
+        this.restart();
     }
 }
 

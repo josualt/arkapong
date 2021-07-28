@@ -4,7 +4,7 @@ class Block extends Phaser.GameObjects.Sprite{
         this.scene = scene;
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        scene.physics.add.collider(scene.ball, this, () => this.touch(), null, scene);
+        scene.physics.add.collider(scene.balls[0], this, () => this.touch(), null, scene);
         this.body.bounce = 1;
         this.body.immovable = true;
         this.tint = color;
