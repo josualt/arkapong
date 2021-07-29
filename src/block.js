@@ -4,7 +4,13 @@ class Block extends Phaser.GameObjects.Sprite{
         this.scene = scene;
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        scene.physics.add.collider(scene.balls[0], this, () => this.touch(), null, scene);
+
+        if (scene.balls) {
+          scene.balls.forEach(ball => {
+            scene.physics.add.collider(ball, this, () => this.touch(), null, scene);
+          });
+        }
+
         this.body.bounce = 1;
         this.body.immovable = true;
         this.tint = color;
@@ -13,7 +19,7 @@ class Block extends Phaser.GameObjects.Sprite{
 
     log () {
         console.log("Im generic");
-    } 
+    }
 }
 
 export default Block;

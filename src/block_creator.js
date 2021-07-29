@@ -66,7 +66,30 @@ class BlockCreator{
     reset() {
         this.blocks.forEach(block => {block.destroy();});
         this.blocks = [];
-    } 
+    }
+
+    wall() {
+        this.width = this.scene.sys.game.config.width;
+        this.height = this.scene.sys.game.config.height;
+        this.center_width = this.width/2;
+        const center_height = this.height/2;
+        console.log(this.width, this.height, Math.round(this.height))
+        const positions = Array(Math.round(this.width / 16)).fill([]);
+        positions.forEach((position,i) => { positions[i] = Array(Math.round(this.height / 32)).fill([0,0])})
+        positions.forEach((col, i) => {
+            positions[i].forEach((row, j) => {
+                positions[i][j] = [(i * 17) + 1, (j * 33) ];
+                // new GreenBlock(this.scene, (i * 17), (j * 33), 0x00ff00);
+            });
+        });
+        const shuffled = positions.flat().sort((a,b) => 0.5 - Math.random());
+
+        shuffled.forEach((position, index) => {
+            const [i, j] = position;
+            setTimeout(() => new GreenBlock(this.scene, i, j, 0x00ff00), index * 10);
+        });
+    }
+
 }
 
 export default BlockCreator;

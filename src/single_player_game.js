@@ -117,10 +117,8 @@ class SinglePlayerGame extends Phaser.Scene {
                   this.izquierda.body.y -= 3;
                 }
               } else if (this.balls[0].body.velocity.x > 0 && this.izquierda.body.y -1 > this.center_height) {
-                console.log("Move up!!");
                 this.izquierda.body.y -= 3;
               } else if (this.balls[0].body.velocity.x > 0 && this.izquierda.body.y - 1 < this.center_height) {
-                console.log("Move down!!");
                 this.izquierda.body.y += 3;
               }
             }
