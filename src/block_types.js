@@ -29,4 +29,19 @@ export default [
         color: 0xffc0cb,
         description: "perma-block"
     },
+    {
+        name: "yellow",
+        color: 0xffff00,
+        description: "shrink ball"
+    },
+    {
+        name: "brown",
+        color: 0x985c41,
+        description: "speed ball"
+    },
+    {
+        name: "grey",
+        color: 0x4c4c4c,
+        description: "freez oponent"
+    },
 ];
