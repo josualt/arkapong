@@ -1,6 +1,15 @@
 {
-  "name": "02_platformer",
-  "version": "0.0.1",
+  "name": "arkapong",
+  "window": {
+    "title": "ARKAPONG",
+    "width": 1042,
+    "height": 586,
+    "fullscreen": true,
+    "toolbar": true,
+    "icon": "customIcon.png"
+  },
+  "version": "0.1.0",
+  "chromium-args": "--data-path='./saves/' --in-process-gpu --disable-transparency",
   "description": "Platformer game using phaser3",
   "scripts": {
     "start": "npx webpack-cli serve -c webpack.dev.js --mode development",
