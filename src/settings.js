@@ -66,10 +66,12 @@ class Settings extends Phaser.Scene {
 
     update(){
         if (this.ESC.isDown) {
+            this.sound.play("escape");
             this.scene.start('menu');
         }
 
         if (this.ENTER.isDown) {
+            this.sound.play("paddle");
             this.registry.set("ballSpeed", this.selected[0]);
             this.registry.set("paddleSpeed", this.selected[1]);
             this.registry.set("winScore", this.selected[2]);
@@ -88,6 +90,7 @@ class Settings extends Phaser.Scene {
         this.options[this.currentSetting][this.currentOption].tint = 0x000000;
         this.rectangles[this.currentSetting].x = this.center_width - 125 + (this.currentOption * 60);
         console.log(this.currentSetting,this.currentOption ,this.options[this.currentSetting][this.currentOption]);
+        this.sound.play("menu");
     }
 
     menuRight(){
@@ -101,6 +104,7 @@ class Settings extends Phaser.Scene {
         this.options[this.currentSetting][this.currentOption].tint = 0x000000;
         this.rectangles[this.currentSetting].x = this.center_width - 125 + (this.currentOption * 60);;
         console.log(this.currentSetting,this.currentOption ,this.options[this.currentSetting][this.currentOption]);
+        this.sound.play("menu");
     }
     menuUp(){
         this.settings[this.currentSetting].tint = 0xffffff;
@@ -113,6 +117,7 @@ class Settings extends Phaser.Scene {
         this.rectangle.y = 150 + (this.currentSetting * 100);
         this.currentOption = this.selected[this.currentSetting];
         console.log(this.currentSetting);
+        this.sound.play("menu");
     }
 
     menuDown(){
@@ -126,6 +131,7 @@ class Settings extends Phaser.Scene {
         this.rectangle.y = 150 + (this.currentSetting * 100);
         this.currentOption = this.selected[this.currentSetting];
         console.log(this.currentSetting);
+        this.sound.play("menu");
     }
 }
 

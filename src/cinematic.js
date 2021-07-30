@@ -32,7 +32,7 @@ class Cinematic extends Phaser.Scene {
         this.generateWaves();
         this.stopped = false;
         setTimeout(() => this.stopAnimation(), 4000);
-        setTimeout(() => this.blockCreator.wall(), 3000);
+        // setTimeout(() => this.blockCreator.wall(), 3000);
     }
 
     update(){

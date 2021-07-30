@@ -6,6 +6,7 @@ class CyanBlock extends Block{
     }
 
     touch(){
+        this.scene.sound.play("block");
         console.log("cyan");
         this.destroy();
     }

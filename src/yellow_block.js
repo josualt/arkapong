@@ -7,6 +7,7 @@ class YellowBlock extends Block{
 
     touch(){
         console.log("yellow");
+        this.scene.sound.play("shrink");
         this.scene.balls.forEach(ball => ball.setScale(0.5, 0.5));
         this.destroy();
     }

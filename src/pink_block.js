@@ -6,6 +6,7 @@ class PinkBlock extends Block{
     }
 
     touch(){
+        this.scene.sound.play("block");
         console.log("pink", this.scene.izquierda);
     }
 }

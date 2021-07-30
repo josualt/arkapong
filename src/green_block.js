@@ -7,7 +7,7 @@ class GreenBlock extends Block{
 
     touch(){
         console.log("green", this.scene.izquierda);
-        
+        this.scene.sound.play("enlarge");
         if (this.affectsPlayerA) {
             this.scene.izquierda.setScale(1, 2);
         } else {

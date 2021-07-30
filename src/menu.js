@@ -55,6 +55,7 @@ class Menu extends Phaser.Scene {
         this.texts[this.current].tint = 0x000000;
         this.rectangle.y = 150 + (this.current * 50);
         console.log(this.options[this.current], this.current);
+        this.sound.play("menu");
     }
 
     menuDown(){
@@ -67,6 +68,7 @@ class Menu extends Phaser.Scene {
         this.texts[this.current].tint = 0x000000;
         this.rectangle.y = 150 + (this.current * 50);
         console.log(this.options[this.current], this.current);
+        this.sound.play("menu");
     }
 }
 

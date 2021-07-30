@@ -6,6 +6,7 @@ class BrownBlock extends Block{
     }
 
     touch(){
+        this.scene.sound.play("enlarge");
         console.log("brown", this.scene.izquierda);
         
         this.scene.balls.forEach(ball => ball.setVelocityX(ball.body.velocity.x * 2));

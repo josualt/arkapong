@@ -59,6 +59,7 @@ class MultiPlayerGame extends Phaser.Scene {
     update(){
         if (this.ESC.isDown) {
             this.blockCreator.stop();
+            this.sound.play("escape");
             this.scene.start('menu');
         }
         
@@ -73,10 +74,12 @@ class MultiPlayerGame extends Phaser.Scene {
                 if(this.balls[i].x < 0) {
                     this.balls[i].destroy();
                     this.balls[i] = null;
+                    this.sound.play("lose");
                     this.incrementB();
                 } else if (this.balls[i].x > this.width){   
                     this.balls[i].destroy();
                     this.balls[i] = null;
+                    this.sound.play("lose");
                     this.incrementA();  
                 }
             }
@@ -141,6 +144,7 @@ class MultiPlayerGame extends Phaser.Scene {
     chocaPala(ball, paddle) {
         const hitPoint = paddle.y - ball.y
         console.log(ball.y, paddle.y, paddle.y - ball.y );
+        this.sound.play("paddle");
         if(hitPoint < 2 && hitPoint > -2){
             ball.setVelocityY(0)
         } else{
@@ -153,6 +157,7 @@ class MultiPlayerGame extends Phaser.Scene {
         if(this.pointsA < this.points && this.pointsB < this.points){
             console.log(this.pointsA, this.pointsB);
             this.createBall();
+            this.sound.play("start");
         }
     }
 

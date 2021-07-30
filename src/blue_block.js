@@ -6,6 +6,7 @@ class BlueBlock extends Block{
     }
 
     touch(){
+        this.scene.sound.play("shrink");
         console.log("booOOOoom", this.scene.izquierda);
         
         if (this.affectsPlayerA) {

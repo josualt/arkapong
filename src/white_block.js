@@ -7,6 +7,7 @@ class WhiteBlock extends Block{
 
     touch(){
         console.log("white");
+        this.scene.sound.play("threeball");
         this.scene.createBall(180);
         this.scene.createBall(100)
         this.destroy();
