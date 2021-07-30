@@ -30,6 +30,8 @@ class Cinematic extends Phaser.Scene {
         this.createBall();
         this.waves = [];
         this.generateWaves();
+        this.stopped = false;
+        setTimeout(() => this.stopAnimation(), 4000);
         setTimeout(() => this.blockCreator.wall(), 3000);
     }
 
@@ -38,7 +40,8 @@ class Cinematic extends Phaser.Scene {
             this.scene.start("menu");
         }
 
-        this.waves.forEach((wave, i) => this.updateWave(wave, i));
+        if (!this.stopped)
+         this.waves.forEach((wave, i) => this.updateWave(wave, i));
     }
 
     createBall(velocityX = -180){
@@ -77,6 +80,12 @@ class Cinematic extends Phaser.Scene {
 
         this.waves = this.waves.filter(wave => wave !== null);
         if (this.waves.length < 1) this.generateWaves();
+    }
+
+    stopAnimation () {
+        this.waves.forEach(wave => wave.destroy());
+        this.stopped = true;
+        this.ball.destroy();
     }
 }
 

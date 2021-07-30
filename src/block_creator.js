@@ -10,7 +10,8 @@ import BrownBlock from './brown_block';
 import GreyBlock from './grey_block';
 import CyanBlock from './cyan_block';
 import MagentaBlock from './magenta_block';
-class BlockCreator{
+
+class BlockCreator {
 
     constructor(scene){
         this.scene = scene;
@@ -29,40 +30,44 @@ class BlockCreator{
         const x = Phaser.Math.Between(250, 450)
         const y = Phaser.Math.Between(0, 390)
 
+       this.blocks.push(this.generateBlock(blockType, x, y));
+    }
+
+    generateBlock(blockType, x, y) {
         switch (blockType.name){
             case "white":
-                this.blocks.push(new WhiteBlock(this.scene, x, y, blockType.color));
-                break;
+                return new WhiteBlock(this.scene, x, y, blockType.color);
+
             case "green":
-                this.blocks.push(new GreenBlock(this.scene, x, y, blockType.color));
-                break;
+                return new GreenBlock(this.scene, x, y, blockType.color);
+
             case "blue":
-                this.blocks.push(new BlueBlock(this.scene, x, y, blockType.color));
-                break;
+                return new BlueBlock(this.scene, x, y, blockType.color);
+
             case "red":
-                this.blocks.push(new RedBlock(this.scene, x, y, blockType.color));
-                break
+                return new RedBlock(this.scene, x, y, blockType.color);
+
             case "orange":
-                this.blocks.push(new OrangeBlock(this.scene, x, y, blockType.color));
-                break;
+                return new OrangeBlock(this.scene, x, y, blockType.color);
+
             case "pink":
-                this.blocks.push(new PinkBlock(this.scene, x, y, blockType.color));
-                break;
+                return new PinkBlock(this.scene, x, y, blockType.color);
+
             case "yellow":
-                this.blocks.push(new YellowBlock(this.scene, x, y, blockType.color));
-                break;
+                return new YellowBlock(this.scene, x, y, blockType.color);
+
             case "brown":
-                this.blocks.push(new BrownBlock(this.scene, x, y, blockType.color));
-                break;
+                return new BrownBlock(this.scene, x, y, blockType.color);
+
             case "grey":
-                this.blocks.push(new GreyBlock(this.scene, x, y, blockType.color));
-                break;
+                return new GreyBlock(this.scene, x, y, blockType.color);
+
             case "cyan":
-                this.blocks.push(new CyanBlock(this.scene, x, y, blockType.color));
-                break;
+                return new CyanBlock(this.scene, x, y, blockType.color);
+
             case "magenta":
-                this.blocks.push(new MagentaBlock(this.scene, x, y, blockType.color));
-                break;
+                return new MagentaBlock(this.scene, x, y, blockType.color);
+
         }
     }
 
@@ -86,14 +91,14 @@ class BlockCreator{
         positions.forEach((col, i) => {
             positions[i].forEach((row, j) => {
                 positions[i][j] = [(i * 17) + 1, (j * 33) ];
-                // new GreenBlock(this.scene, (i * 17), (j * 33), 0x00ff00);
             });
         });
         const shuffled = positions.flat().sort((a,b) => 0.5 - Math.random());
 
         shuffled.forEach((position, index) => {
             const [i, j] = position;
-            setTimeout(() => new GreenBlock(this.scene, i, j, 0x00ff00), index * 10);
+            let blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length -1)];
+            setTimeout(() => this.generateBlock(blockType, i , j), index * 10);
         });
     }
 
