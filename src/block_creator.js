@@ -8,7 +8,8 @@ import PinkBlock from './pink_block';
 import YellowBlock from './yellow_block';
 import BrownBlock from './brown_block';
 import GreyBlock from './grey_block';
-
+import CyanBlock from './cyan_block';
+import MagentaBlock from './magenta_block';
 class BlockCreator{
 
     constructor(scene){
@@ -55,6 +56,12 @@ class BlockCreator{
                 break;
             case "grey":
                 this.blocks.push(new GreyBlock(this.scene, x, y, blockType.color));
+                break;
+            case "cyan":
+                this.blocks.push(new CyanBlock(this.scene, x, y, blockType.color));
+                break;
+            case "magenta":
+                this.blocks.push(new MagentaBlock(this.scene, x, y, blockType.color));
                 break;
         }
     }

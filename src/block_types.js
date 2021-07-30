@@ -42,6 +42,16 @@ export default [
     {
         name: "grey",
         color: 0x4c4c4c,
-        description: "freez oponent"
+        description: "freez paddle"
+    },
+    {
+        name: "cyan",
+        color: 0x00fff2,
+        description: "blink paddle"
+    },
+    {
+        name: "magenta",
+        color: 0xcf3476,
+        description: "blink ball"
     },
 ];
