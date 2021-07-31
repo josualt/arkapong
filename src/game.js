@@ -120,6 +120,10 @@ class Game extends Phaser.Scene {
     }
 
     chocaPala(ball, paddle) {
+        if (paddle.body.velocity.x !== 0) {
+            paddle.x += paddle.body.velocity.x > 0 ? -10 : 10;
+        }
+
         const hitPoint = paddle.y - ball.y
         console.log(ball.y, paddle.y, paddle.y - ball.y );
         this.sound.play("paddle");
@@ -164,11 +168,14 @@ class Game extends Phaser.Scene {
         x = x || this.center_width;
         y = y || this.center_height;
         const ball = this.physics.add.sprite(x, y, "ball");
-        console.log("Ball ", ball.visible);
         ball.setVelocityX(velocityX || this.ballSpeed * this.startDirection);
         ball.setVelocityY(Phaser.Math.Between(-150, 150));
         ball.setCollideWorldBounds(true);
         ball.setBounce(1);
+        ball.body.onWorldBounds = true;
+        this.physics.world.on('worldbounds', () => {
+            this.sound.play("wall")
+        }, this)
         console.log(ball.body)
         this.physics.add.collider(ball, this.izquierda, this.chocaPala, null, this);
         this.physics.add.collider(ball, this.derecha, this.chocaPala, null, this);

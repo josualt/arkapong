@@ -10,6 +10,8 @@ class Bootloader extends Phaser.Scene {
         this.load.on("complete", () => {
             this.scene.start("cinematic");
         })
+
+        console.log("DEbug? ");
         
         this.load.image("ball", "./assets/images/ball.png");
         this.load.image("izquierda", "./assets/images/paddle.png");
@@ -21,6 +23,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("block", "./assets/images/block.png");
         this.load.image("pressEnter", "./assets/images/enter_button.png");
         this.load.image("pressEsc", "./assets/images/esc_button.png");
+        this.load.audio("pong", "./assets/sounds/pong.mp3");
         this.load.audio("menu", "./assets/sounds/menu.mp3");
         this.load.audio("block", "./assets/sounds/block.mp3");
         this.load.audio("enlarge", "./assets/sounds/enlarge.mp3");

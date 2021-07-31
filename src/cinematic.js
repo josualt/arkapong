@@ -21,7 +21,7 @@ class Cinematic extends Phaser.Scene {
         this.add.bitmapText(this.center_width, 150 , "squareFont","it was a sunny afternoon on the beach \n when suddenly...", 20).setOrigin(0.5);
         this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.blockCreator = new BlockCreator(this);
-        //this.blockCreator.wall();
+        this.sound.play("pong");
         this.izquierda = new Palas(this, 200,this.height-20, "izquierda")
         this.derecha = new Palas(this,600,this.height-20, "derecha");
         this.add.rectangle(0,this.height-5,this.width,6,0xffffff).setOrigin(0);
