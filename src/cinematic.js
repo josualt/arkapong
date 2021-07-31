@@ -18,7 +18,7 @@ class Cinematic extends Phaser.Scene {
         this.center_width = this.width/2;
         const center_height = this.height/2;
         this.sea_height = center_height+100;
-        //this.add.bitmapText(this.center_width, 150 , "squareFont","ARKAPONG", 160).setOrigin(0.5);
+        this.add.bitmapText(this.center_width, 150 , "squareFont","it was a sunny afternoon on the beach \n when suddenly...", 20).setOrigin(0.5);
         this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.blockCreator = new BlockCreator(this);
         //this.blockCreator.wall();
@@ -32,7 +32,8 @@ class Cinematic extends Phaser.Scene {
         this.generateWaves();
         this.stopped = false;
         this.stopAnimationId = setTimeout(() => this.stopAnimation(), 4000);
-        this.stopBlockCreatorId = setTimeout(() => this.blockCreator.wall(), 3000);
+        this.stopBlockCreatorId = setTimeout(() => this.blockCreator.wall(), 4000);
+        this.stopShowTitle = setTimeout(() => this.blockCreator.showTitle(), 14000);
     }
 
     update(){
