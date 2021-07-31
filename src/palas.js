@@ -9,8 +9,8 @@ class Palas extends Phaser.GameObjects.Sprite {
     }
 
     reset () {
+        this.stop();
         this.setScale(1, 1);
-        this.body.x;
         clearInterval(this.clearID);
     }
 

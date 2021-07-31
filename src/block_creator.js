@@ -30,7 +30,7 @@ class BlockCreator {
     spawn(){
         console.log("new block");
         const blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length -1)];
-        const [x, y] = this.positions[this.current];//Phaser.Math.Between(250, 450)
+        const [x, y] = this.positions[this.current];
 
        this.blocks.push(this.generateBlock(blockType, x, y));
        this.current++;

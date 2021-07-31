@@ -154,8 +154,8 @@ class MultiPlayerGame extends Phaser.Scene {
 
     restart(){
         this.blockCreator.reset();
-        this.izquierda.stop();
-        this.derecha.stop();
+        this.izquierda.reset();
+        this.derecha.reset();
         if(this.pointsA < this.points && this.pointsB < this.points){
             console.log(this.pointsA, this.pointsB);
             this.createBall();
@@ -165,11 +165,13 @@ class MultiPlayerGame extends Phaser.Scene {
 
     incrementA() {
         this.pointsA++;
+        this.startDirection = 1;
         this.pointsAText.setText(this.pointsA);
     }
 
     incrementB(){
         this.pointsB++;
+        this.startDirection = -1;
         this.pointsBText.setText(this.pointsB);
     }
 
@@ -179,10 +181,11 @@ class MultiPlayerGame extends Phaser.Scene {
         this.continueMessage.setText("press ENTER to play again ESC to quit");
     }
     
-    createBall(velocityX = -180){
+    createBall(velocityX){
         const ball = this.physics.add.image(this.center_width, this.center_height, "ball");
         ball.x = this.center_width;
-        ball.setVelocityX(velocityX)
+        console.log("Velocity? ", velocityX || 180 * this.startDirection);
+        ball.setVelocityX(velocityX || 180 * this.startDirection);
         ball.setVelocityY(Phaser.Math.Between(-150, 150));
         ball.setCollideWorldBounds(true);
         ball.setBounce(1);
@@ -195,6 +198,7 @@ class MultiPlayerGame extends Phaser.Scene {
 
     restartGame(){
         this.blockCreator.generate();
+        this.startDirection = (Math.random() > 0.5) ? -1 : 1;
         this.balls = [];
         this.createBall();
         console.log("restart game", this.pointsA, this.pointsB);
