@@ -12,6 +12,7 @@ class Palas extends Phaser.GameObjects.Sprite {
         this.stop();
         this.setScale(1, 1);
         this.setVisible(true);
+        this.isFrozen = false;
         clearInterval(this.blinkIntervalId);
         clearInterval(this.clearId);
     }

@@ -46,12 +46,8 @@ class Game extends Phaser.Scene {
         //Controles
         //pala derecha
         this.cursor = this.input.keyboard.createCursorKeys();
+
         this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-        //pala izquierda
-        this.cursor_W = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        this.cursor_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        this.cursor_A = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        this.cursor_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     }
 
     update(){
@@ -108,31 +104,12 @@ class Game extends Phaser.Scene {
                 } 
             }
   
-    
-            //Pala izquierda
-            if(!this.izquierda.isFrozen){
-                if(this.cursor_S.isDown){
-                    this.izquierda.body.y += this.paddleSpeed;
-                }
-                
-                if(this.cursor_W.isDown){
-                    this.izquierda.body.y -= this.paddleSpeed;
-                }
-                
-                if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
-                    this.izquierda.body.setVelocityX(this.paddleSpeed * 70)
-                }
-        
-                if(this.cursor_D.isUp || this.izquierda.body.x >= this.center_width/2){
-                      this.izquierda.body.setVelocityX(0);
-                  }
-                
-                if(this.cursor_A.isDown && this.izquierda.body.x > 0){
-                    this.izquierda.body.x -= this.paddleSpeed;
-                }
-            }
-     
+            this.playerBMoves();
         }
+    }
+
+    playerBMoves () {
+
     }
 
     setGameSettings () {
@@ -157,6 +134,7 @@ class Game extends Phaser.Scene {
         this.blockCreator.reset();
         this.izquierda.reset();
         this.derecha.reset();
+        clearInterval(this.ballIntervalId)
         if(this.pointsA < this.points && this.pointsB < this.points){
             console.log(this.pointsA, this.pointsB);
             this.createBall();
@@ -185,9 +163,8 @@ class Game extends Phaser.Scene {
     createBall(velocityX, x, y) {
         x = x || this.center_width;
         y = y || this.center_height;
-        const ball = this.physics.add.image(x, y, "ball");
-       //  ball.x = this.center_width;
-        console.log("Velocity? ", velocityX || this.ballSpeed * this.startDirection);
+        const ball = this.physics.add.sprite(x, y, "ball");
+        console.log("Ball ", ball.visible);
         ball.setVelocityX(velocityX || this.ballSpeed * this.startDirection);
         ball.setVelocityY(Phaser.Math.Between(-150, 150));
         ball.setCollideWorldBounds(true);
@@ -219,6 +196,13 @@ class Game extends Phaser.Scene {
         if (this.effectMessage) this.effectMessage.destroy();
         this.effectMessage = this.add.bitmapText(this.center_width, 10, "squareFont", block.description, 15).setOrigin(0.5);
         this.paddleEffectId = setTimeout(() => this.effectMessage.destroy(), 2000);
+    }
+
+    blinkBalls() {
+        if (this.ballIntervalId) clearInterval(this.ballIntervalId);
+        this.ballIntervalId = setInterval(() => this.balls.forEach(ball => { 
+            ball.setVisible(!ball.visible)
+        }), 300);
     }
 }
 
