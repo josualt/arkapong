@@ -78,6 +78,12 @@ class BlockCreator {
         clearInterval(this.generator);
     }
 
+    setColliders (ball) {
+        this.blocks.forEach(block => {
+            this.scene.physics.add.collider(ball, block, () => block.touch(), null, this.scene);
+        });
+    }
+
     reset() {
         this.current = 0;
         this.positions = this.generatePositions(this.width / 3, this.height, (this.width / 3) - 16);

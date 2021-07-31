@@ -109,9 +109,9 @@ class SinglePlayerGame extends Phaser.Scene {
 
 
             //Pala izquierda
-            if (this.balls[0]) {
+            if (!this.izquierda.isFrozen && this.balls[0]) {
               if(this.balls[0].body.velocity.x < 0) {
-                if (this.balls[0].body.y > this.izquierda.body.y - 3) {
+                if (this.balls[0].body.y > this.izquierda.body.y - 1) {
                   this.izquierda.body.y += 3;
                 } else {
                   this.izquierda.body.y -= 3;
@@ -122,31 +122,6 @@ class SinglePlayerGame extends Phaser.Scene {
                 this.izquierda.body.y += 3;
               }
             }
-
-
-            /*
-            if(!this.izquierda.isFrozen){
-                if(this.cursor_S.isDown){
-                    this.izquierda.body.y += 3;
-                }
-
-                if(this.cursor_W.isDown){
-                    this.izquierda.body.y -= 3;
-                }
-
-                if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
-                    this.izquierda.body.setVelocityX(200)
-                }
-
-                if(this.cursor_D.isUp || this.izquierda.body.x >= this.center_width/2){
-                      this.izquierda.body.setVelocityX(0);
-                  }
-
-                if(this.cursor_A.isDown && this.izquierda.body.x > 0){
-                    this.izquierda.body.x -= 3;
-                }
-            }*/
-
         }
 
 

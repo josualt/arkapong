@@ -154,6 +154,8 @@ class MultiPlayerGame extends Phaser.Scene {
 
     restart(){
         this.blockCreator.reset();
+        this.izquierda.stop();
+        this.derecha.stop();
         if(this.pointsA < this.points && this.pointsB < this.points){
             console.log(this.pointsA, this.pointsB);
             this.createBall();
@@ -187,6 +189,7 @@ class MultiPlayerGame extends Phaser.Scene {
         console.log(ball.body)
         this.physics.add.collider(ball, this.izquierda, this.chocaPala, null, this);
         this.physics.add.collider(ball, this.derecha, this.chocaPala, null, this);
+        this.blockCreator.setColliders(ball);
         this.balls.push(ball);
     }
 

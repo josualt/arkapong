@@ -13,6 +13,12 @@ class Palas extends Phaser.GameObjects.Sprite {
         this.body.x;
         clearInterval(this.clearID);
     }
+
+    stop() {
+        this.body.setVelocityX(0);
+        this.body.setVelocityY(0);
+    }
+
     freeze(){
         this.isFrozen = true;
         this.clearID = setTimeout(()=>{this.isFrozen = false;}, Phaser.Math.Between(1000, 3000))
