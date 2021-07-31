@@ -1,6 +1,6 @@
 import Palas from './palas.js';
 import BlockCreator from './block_creator';
-
+import settingsOptions from './settings_options';
 
 class MultiPlayerGame extends Phaser.Scene {
     constructor () {
@@ -14,10 +14,10 @@ class MultiPlayerGame extends Phaser.Scene {
     create () {
         console.log(this.registry.get("ballSpeed"),this.registry.get("paddleSpeed"),this.registry.get("winScore") );
 
+        this.setGameSettings();
   
         this.pointsA = 0;
         this.pointsB = 0;
-        this.points = 10; // this.registry.get("");
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
         this.center_width = this.width/2;
@@ -90,24 +90,22 @@ class MultiPlayerGame extends Phaser.Scene {
             //pala derecha
             if(!this.derecha.isFrozen){
                 if(this.cursor.down.isDown){
-                    this.derecha.body.y += 3;
+                    this.derecha.body.y += this.paddleSpeed;
                 }
          
                 if(this.cursor.up.isDown) {
-                    this.derecha.body.y -= 3;
+                    this.derecha.body.y -= this.paddleSpeed;
                 } 
                 
                 if(this.cursor.right.isDown && this.derecha.body.x <= this.width - 10) {
-                    this.derecha.body.x += 3;
+                    this.derecha.body.x += this.paddleSpeed;
                 } 
                 
                 if(this.cursor.left.isDown && this.derecha.body.x >= this.center_width+(this.center_width/2) - 10) {
-                    //this.derecha.body.x -= 3;
-                    this.derecha.body.setVelocityX(-200)
+                    this.derecha.body.setVelocityX(-this.paddleSpeed * 70)
                 } 
         
                 if(this.cursor.left.isUp || this.derecha.body.x < this.center_width+(this.center_width/2) - 10) {
-                    //this.derecha.body.x -= 3;
                     this.derecha.body.setVelocityX(0);
                 } 
             }
@@ -116,15 +114,15 @@ class MultiPlayerGame extends Phaser.Scene {
             //Pala izquierda
             if(!this.izquierda.isFrozen){
                 if(this.cursor_S.isDown){
-                    this.izquierda.body.y += 3;
+                    this.izquierda.body.y += this.paddleSpeed;
                 }
                 
                 if(this.cursor_W.isDown){
-                    this.izquierda.body.y -= 3;
+                    this.izquierda.body.y -= this.paddleSpeed;
                 }
                 
                 if(this.cursor_D.isDown && this.izquierda.body.x < this.center_width/2){
-                    this.izquierda.body.setVelocityX(200)
+                    this.izquierda.body.setVelocityX(this.paddleSpeed * 70)
                 }
         
                 if(this.cursor_D.isUp || this.izquierda.body.x >= this.center_width/2){
@@ -132,13 +130,18 @@ class MultiPlayerGame extends Phaser.Scene {
                   }
                 
                 if(this.cursor_A.isDown && this.izquierda.body.x > 0){
-                    this.izquierda.body.x -= 3;
+                    this.izquierda.body.x -= this.paddleSpeed;
                 }
             }
      
         }
-        
-        
+    }
+
+    setGameSettings () {
+        this.ballSpeed = settingsOptions[0].options[this.registry.get("ballSpeed", 2)];
+        this.paddleSpeed = settingsOptions[1].options[this.registry.get("paddleSpeed", 3)];
+        this.points = settingsOptions[2].options[this.registry.get("winScore", 2)];
+        console.log("Settings: ", this.paddleSpeed, this.ballSpeed, this.points)
     }
 
     chocaPala(ball, paddle) {
@@ -181,11 +184,13 @@ class MultiPlayerGame extends Phaser.Scene {
         this.continueMessage.setText("press ENTER to play again ESC to quit");
     }
     
-    createBall(velocityX){
-        const ball = this.physics.add.image(this.center_width, this.center_height, "ball");
-        ball.x = this.center_width;
-        console.log("Velocity? ", velocityX || 180 * this.startDirection);
-        ball.setVelocityX(velocityX || 180 * this.startDirection);
+    createBall(velocityX, x, y) {
+        x = x || this.center_width;
+        y = y || this.center_height;
+        const ball = this.physics.add.image(x, y, "ball");
+       //  ball.x = this.center_width;
+        console.log("Velocity? ", velocityX || this.ballSpeed * this.startDirection);
+        ball.setVelocityX(velocityX || this.ballSpeed * this.startDirection);
         ball.setVelocityY(Phaser.Math.Between(-150, 150));
         ball.setCollideWorldBounds(true);
         ball.setBounce(1);

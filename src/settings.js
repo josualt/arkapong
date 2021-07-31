@@ -37,9 +37,9 @@ class Settings extends Phaser.Scene {
             this.options[i] = [];
             for(let j = 0; j < settingsOptions[i].options.length; j++){
                 let color = this.selected[i] === j ? 0x000000 : 0xffffff;
-                this.options[i].push(this.add.bitmapText(this.center_width - 125 + (j*60), 200 + (i*100)  , "squareFont",settingsOptions[i].options[j],30).setOrigin(0.5).setTint(color));
+                this.options[i].push(this.add.bitmapText(this.center_width - 250 + (j*60), 200 + (i*100)  , "squareFont",settingsOptions[i].options[j],30).setOrigin(0.5).setTint(color));
             }
-            let rectangle = new Phaser.GameObjects.Rectangle(this, this.center_width - 125 + (this.selected[i]*60), 200 + (i*100), 40, 40, 0xffffff).setOrigin(0.5);
+            let rectangle = new Phaser.GameObjects.Rectangle(this, this.center_width - 250 + (this.selected[i]*60), 200 + (i*100), 52, 52, 0xffffff).setOrigin(0.5);
             this.rectangles.push(rectangle);
             layer.add(this.rectangles[i]);
         }
@@ -88,7 +88,7 @@ class Settings extends Phaser.Scene {
         }
         this.selected[this.currentSetting] = this.currentOption;
         this.options[this.currentSetting][this.currentOption].tint = 0x000000;
-        this.rectangles[this.currentSetting].x = this.center_width - 125 + (this.currentOption * 60);
+        this.rectangles[this.currentSetting].x = this.center_width - 250 + (this.currentOption * 60);
         console.log(this.currentSetting,this.currentOption ,this.options[this.currentSetting][this.currentOption]);
         this.sound.play("menu");
     }
@@ -102,10 +102,11 @@ class Settings extends Phaser.Scene {
         }
         this.selected[this.currentSetting] = this.currentOption;
         this.options[this.currentSetting][this.currentOption].tint = 0x000000;
-        this.rectangles[this.currentSetting].x = this.center_width - 125 + (this.currentOption * 60);;
+        this.rectangles[this.currentSetting].x = this.center_width - 250 + (this.currentOption * 60);;
         console.log(this.currentSetting,this.currentOption ,this.options[this.currentSetting][this.currentOption]);
         this.sound.play("menu");
     }
+
     menuUp(){
         this.settings[this.currentSetting].tint = 0xffffff;
         if(this.currentSetting === 0){
