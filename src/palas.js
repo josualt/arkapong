@@ -11,7 +11,9 @@ class Palas extends Phaser.GameObjects.Sprite {
     reset () {
         this.stop();
         this.setScale(1, 1);
-        clearInterval(this.clearID);
+        this.setVisible(true);
+        clearInterval(this.blinkIntervalId);
+        clearInterval(this.clearId);
     }
 
     stop() {
@@ -21,7 +23,12 @@ class Palas extends Phaser.GameObjects.Sprite {
 
     freeze(){
         this.isFrozen = true;
-        this.clearID = setTimeout(()=>{this.isFrozen = false;}, Phaser.Math.Between(1000, 3000))
+        this.clearId = setTimeout(()=>{this.isFrozen = false;}, Phaser.Math.Between(1000, 3000))
+    }
+
+    blink () {
+        if (this.blinkIntervalId) clearInterval(this.blinkIntervalId)
+        this.blinkIntervalId = setInterval(() => { this.setVisible(!this.visible); }, 300);
     }
 }
 
