@@ -31,12 +31,15 @@ class Cinematic extends Phaser.Scene {
         this.waves = [];
         this.generateWaves();
         this.stopped = false;
-        setTimeout(() => this.stopAnimation(), 4000);
-        // setTimeout(() => this.blockCreator.wall(), 3000);
+        this.stopAnimationId = setTimeout(() => this.stopAnimation(), 4000);
+        this.stopBlockCreatorId = setTimeout(() => this.blockCreator.wall(), 3000);
     }
 
     update(){
         if(this.ENTER.isDown) {
+            clearTimeout(this.stopAnimationId);
+            clearTimeout(this.stopBlockCreatorId);
+            this.blockCreator.stop();
             this.scene.start("menu");
         }
 

@@ -16,6 +16,9 @@ class BlockCreator {
     constructor(scene){
         this.scene = scene;
         this.blocks = [];
+        this.width = this.scene.sys.game.config.width;
+        this.height = this.scene.sys.game.config.height;
+        this.center_width = this.width/2;
     }
 
     generate(){
@@ -27,10 +30,10 @@ class BlockCreator {
     spawn(){
         console.log("new block");
         const blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length -1)];
-        const x = Phaser.Math.Between(250, 450)
-        const y = Phaser.Math.Between(0, 390)
+        const [x, y] = this.positions[this.current];//Phaser.Math.Between(250, 450)
 
        this.blocks.push(this.generateBlock(blockType, x, y));
+       this.current++;
     }
 
     generateBlock(blockType, x, y) {
@@ -76,32 +79,32 @@ class BlockCreator {
     }
 
     reset() {
+        this.current = 0;
+        this.positions = this.generatePositions(this.width / 3, this.height, (this.width / 3) - 16);
         this.blocks.forEach(block => {block.destroy();});
         this.blocks = [];
     }
 
     wall() {
-        this.width = this.scene.sys.game.config.width;
-        this.height = this.scene.sys.game.config.height;
-        this.center_width = this.width/2;
-        const center_height = this.height/2;
         console.log(this.width, this.height, Math.round(this.height))
-        const positions = Array(Math.round(this.width / 16)).fill([]);
-        positions.forEach((position,i) => { positions[i] = Array(Math.round(this.height / 32)).fill([0,0])})
-        positions.forEach((col, i) => {
-            positions[i].forEach((row, j) => {
-                positions[i][j] = [(i * 17) + 1, (j * 33) ];
-            });
-        });
-        const shuffled = positions.flat().sort((a,b) => 0.5 - Math.random());
-
-        shuffled.forEach((position, index) => {
+        const positions = this.generatePositions(this.width, this.height);
+        positions.forEach((position, index) => {
             const [i, j] = position;
             let blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length -1)];
             setTimeout(() => this.generateBlock(blockType, i , j), index * 10);
         });
     }
 
+    generatePositions (width, height, begin = 0) {
+        const positions = Array(Math.round(width / 16)).fill([]);
+        positions.forEach((position,i) => { positions[i] = Array(Math.round(height / 32)).fill([0,0])})
+        positions.forEach((col, i) => {
+            positions[i].forEach((row, j) => {
+                positions[i][j] = [begin + (i * 17) + 1, (j * 33) ];
+            });
+        });
+        return positions.flat().sort((a,b) => 0.5 - Math.random());
+    }
 }
 
 export default BlockCreator;
