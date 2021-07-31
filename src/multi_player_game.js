@@ -197,7 +197,7 @@ class MultiPlayerGame extends Phaser.Scene {
     }
 
     restartGame(){
-        this.blockCreator.generate();
+        this.blockCreator.generate(true);
         this.startDirection = (Math.random() > 0.5) ? -1 : 1;
         this.balls = [];
         this.createBall();
@@ -209,6 +209,13 @@ class MultiPlayerGame extends Phaser.Scene {
         this.pointsAText.setText(this.pointsA);
         this.pointsBText.setText(this.pointsB);
         console.log("lets go", this.pointsA, this.pointsB);
+    }
+
+    showPaddleEffect (block) {
+        if (this.paddleEffectId) clearTimeout(this.paddleEffectId);
+        if (this.effectMessage) this.effectMessage.destroy();
+        this.effectMessage = this.add.bitmapText(this.center_width, 10, "squareFont", block.description, 15).setOrigin(0.5);
+        this.paddleEffectId = setTimeout(() => this.effectMessage.destroy(), 2000);
     }
 }
 

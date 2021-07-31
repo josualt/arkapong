@@ -1,8 +1,8 @@
 import Block from './block.js';
 
 class WhiteBlock extends Block{
-    constructor(scene, x, y, color){
-        super(scene, x, y, color);
+    constructor(scene, x, y, block, showEffect = false){
+       super(scene, x, y, block, showEffect)
     }
 
     touch(){

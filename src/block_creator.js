@@ -21,55 +21,55 @@ class BlockCreator {
         this.center_width = this.width/2;
     }
 
-    generate(){
+    generate(showEffect = false){
         this.reset();
         console.log("Block generator!!!")
-        this.generator = setInterval(() => this.spawn(), 1 + Phaser.Math.Between(1000, 5000));
+        this.generator = setInterval(() => this.spawn(showEffect), 1 + Phaser.Math.Between(1000, 5000));
     }
 
-    spawn(){
+    spawn(showEffect){
         console.log("new block");
         const blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length -1)];
         const [x, y] = this.positions[this.current];
 
-       this.blocks.push(this.generateBlock(blockType, x, y));
+       this.blocks.push(this.generateBlock(blockType, x, y, showEffect));
        this.current++;
     }
 
-    generateBlock(blockType, x, y) {
+    generateBlock(blockType, x, y, showEffect = false) {
         switch (blockType.name){
             case "white":
-                return new WhiteBlock(this.scene, x, y, blockType.color);
+                return new WhiteBlock(this.scene, x, y, blockType, showEffect);
 
             case "green":
-                return new GreenBlock(this.scene, x, y, blockType.color);
+                return new GreenBlock(this.scene, x, y, blockType, showEffect);
 
             case "blue":
-                return new BlueBlock(this.scene, x, y, blockType.color);
+                return new BlueBlock(this.scene, x, y, blockType, showEffect);
 
             case "red":
-                return new RedBlock(this.scene, x, y, blockType.color);
+                return new RedBlock(this.scene, x, y, blockType, showEffect);
 
             case "orange":
-                return new OrangeBlock(this.scene, x, y, blockType.color);
+                return new OrangeBlock(this.scene, x, y, blockType, showEffect);
 
             case "pink":
-                return new PinkBlock(this.scene, x, y, blockType.color);
+                return new PinkBlock(this.scene, x, y, blockType, showEffect);
 
             case "yellow":
-                return new YellowBlock(this.scene, x, y, blockType.color);
+                return new YellowBlock(this.scene, x, y, blockType, showEffect);
 
             case "brown":
-                return new BrownBlock(this.scene, x, y, blockType.color);
+                return new BrownBlock(this.scene, x, y, blockType, showEffect);
 
             case "grey":
-                return new GreyBlock(this.scene, x, y, blockType.color);
+                return new GreyBlock(this.scene, x, y, blockType, showEffect);
 
             case "cyan":
-                return new CyanBlock(this.scene, x, y, blockType.color);
+                return new CyanBlock(this.scene, x, y, blockType, showEffect);
 
             case "magenta":
-                return new MagentaBlock(this.scene, x, y, blockType.color);
+                return new MagentaBlock(this.scene, x, y, blockType, showEffect);
 
         }
     }
