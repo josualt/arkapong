@@ -7,7 +7,6 @@ class CyanBlock extends Block{
 
     touch(){
         this.scene.sound.play("block");
-        console.log("cyan");
 
         if (this.affectsPlayerA) {
             this.scene.izquierda.blink();

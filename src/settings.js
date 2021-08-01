@@ -7,12 +7,10 @@ class Settings extends Phaser.Scene {
     }
 
     preload(){
-        console.log("settings preload");
+
     }
 
     create(){
-        console.log(this.registry.get("ballSpeed"),this.registry.get("paddleSpeed"),this.registry.get("winScore") );
-
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
         this.center_width = this.width/2;
@@ -22,7 +20,6 @@ class Settings extends Phaser.Scene {
         const winScore = this.registry.get("winScore");
         this.add.bitmapText(this.center_width, 50 , "squareFont","ARKAPONG", 60).setOrigin(0.5);
         this.add.bitmapText(this.center_width, 110 , "squareFont","SETTINGS", 40).setOrigin(0.5);
-        console.log("settings create");
         this.options = [];
         this.rectangles = [];
         this.currentSetting = 0;
@@ -89,7 +86,6 @@ class Settings extends Phaser.Scene {
         this.selected[this.currentSetting] = this.currentOption;
         this.options[this.currentSetting][this.currentOption].tint = 0x000000;
         this.rectangles[this.currentSetting].x = this.center_width - 250 + (this.currentOption * 60);
-        console.log(this.currentSetting,this.currentOption ,this.options[this.currentSetting][this.currentOption]);
         this.sound.play("menu");
     }
 
@@ -103,7 +99,6 @@ class Settings extends Phaser.Scene {
         this.selected[this.currentSetting] = this.currentOption;
         this.options[this.currentSetting][this.currentOption].tint = 0x000000;
         this.rectangles[this.currentSetting].x = this.center_width - 250 + (this.currentOption * 60);;
-        console.log(this.currentSetting,this.currentOption ,this.options[this.currentSetting][this.currentOption]);
         this.sound.play("menu");
     }
 
@@ -117,7 +112,7 @@ class Settings extends Phaser.Scene {
         this.settings[this.currentSetting].tint = 0x000000;
         this.rectangle.y = 150 + (this.currentSetting * 100);
         this.currentOption = this.selected[this.currentSetting];
-        console.log(this.currentSetting);
+
         this.sound.play("menu");
     }
 
@@ -131,7 +126,7 @@ class Settings extends Phaser.Scene {
         this.settings[this.currentSetting].tint = 0x000000;
         this.rectangle.y = 150 + (this.currentSetting * 100);
         this.currentOption = this.selected[this.currentSetting];
-        console.log(this.currentSetting);
+
         this.sound.play("menu");
     }
 }

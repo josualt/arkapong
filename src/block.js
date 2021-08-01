@@ -18,10 +18,6 @@ class Block extends Phaser.GameObjects.Sprite{
         this.affectsPlayerA = x < this.scene.center_width;
         if (showEffect) this.scene.showPaddleEffect(block);
     }
-
-    log () {
-        console.log("Im generic");
-    }
 }
 
 export default Block;

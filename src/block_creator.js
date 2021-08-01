@@ -23,17 +23,15 @@ class BlockCreator {
 
     generate(showEffect = false){
         this.reset();
-        console.log("Block generator!!!")
         this.generator = setInterval(() => this.spawn(showEffect), 1 + Phaser.Math.Between(1000, 5000));
     }
 
     spawn(showEffect){
-        console.log("new block");
         const blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length -1)];
         const [x, y] = this.positions[this.current];
 
        this.blocks.push(this.generateBlock(blockType, x, y, showEffect));
-       this.current++;
+       this.current = this.current === this.positions.length -1 ? 0 : this.current + 1;
     }
 
     generateBlock(blockType, x, y, showEffect = false) {
@@ -92,7 +90,6 @@ class BlockCreator {
     }
 
     wall() {
-        console.log(this.width, this.height, Math.round(this.height))
         const positions = this.generatePositions(this.width, this.height);
         positions.forEach((position, index) => {
             const [i, j] = position;

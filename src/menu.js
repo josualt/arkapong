@@ -5,16 +5,13 @@ class Menu extends Phaser.Scene {
     }
 
     preload(){
-        console.log("menu preload");
     }
 
     create(){
-        console.log(this.registry.get("ballSpeed"),this.registry.get("paddleSpeed"),this.registry.get("winScore") );
-        this.width = this.sys.game.config.width;
+         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
         this.center_width = this.width/2;
         const center_height = this.height/2;
-        console.log("menu create");
         this.add.image(700, 430, "helpB").setScale(0.5)
         this.add.image(95, 430, "helpA").setScale(0.5)
         this.add.image(300, 430, "pressEnter").setScale(0.5)
@@ -54,7 +51,6 @@ class Menu extends Phaser.Scene {
         }
         this.texts[this.current].tint = 0x000000;
         this.rectangle.y = 150 + (this.current * 50);
-        console.log(this.options[this.current], this.current);
         this.sound.play("menu");
     }
 
@@ -67,7 +63,6 @@ class Menu extends Phaser.Scene {
         }
         this.texts[this.current].tint = 0x000000;
         this.rectangle.y = 150 + (this.current * 50);
-        console.log(this.options[this.current], this.current);
         this.sound.play("menu");
     }
 }

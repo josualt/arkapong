@@ -7,7 +7,6 @@ class MagentaBlock extends Block{
 
     touch(){
         this.scene.sound.play("block");
-        console.log("magenta");
         this.scene.blinkBalls();
         this.destroy();
     }

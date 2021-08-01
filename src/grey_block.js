@@ -7,7 +7,7 @@ class GreyBlock extends Block{
 
     touch(){
         this.scene.sound.play("block");
-        console.log("grey");
+
         if (this.affectsPlayerA) {
             this.scene.izquierda.freeze();
         } else {

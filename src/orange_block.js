@@ -7,7 +7,6 @@ class OrangeBlock extends Block{
 
     touch(){
         this.scene.sound.play("block");
-        console.log("Orange", this.scene.izquierda);
         this.destroy();
     }
 }

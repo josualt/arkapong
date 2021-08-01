@@ -8,11 +8,9 @@ class Cinematic extends Phaser.Scene {
     }
 
     preload(){
-        console.log("cinematic preload");
     }
 
     create(){
-        console.log("cinematic create");
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
         this.center_width = this.width/2;
@@ -40,6 +38,7 @@ class Cinematic extends Phaser.Scene {
         if(this.ENTER.isDown) {
             clearTimeout(this.stopAnimationId);
             clearTimeout(this.stopBlockCreatorId);
+            clearTimeout(this.stopShowTitle);
             this.blockCreator.stop();
             this.scene.start("menu");
         }

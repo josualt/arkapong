@@ -8,12 +8,9 @@ class Game extends Phaser.Scene {
     }
 
     preload () {
-        console.log("la escena play se ha cargado");
     }
     
     create () {
-        console.log(this.registry.get("ballSpeed"),this.registry.get("paddleSpeed"),this.registry.get("winScore") );
-
         this.setGameSettings();
   
         this.pointsA = 0;
@@ -116,7 +113,6 @@ class Game extends Phaser.Scene {
         this.ballSpeed = settingsOptions[0].options[this.registry.get("ballSpeed", 2)];
         this.paddleSpeed = settingsOptions[1].options[this.registry.get("paddleSpeed", 3)];
         this.points = settingsOptions[2].options[this.registry.get("winScore", 2)];
-        console.log("Settings: ", this.paddleSpeed, this.ballSpeed, this.points)
     }
 
     chocaPala(ball, paddle) {
@@ -125,7 +121,7 @@ class Game extends Phaser.Scene {
         }
 
         const hitPoint = paddle.y - ball.y
-        console.log(ball.y, paddle.y, paddle.y - ball.y );
+
         this.sound.play("paddle");
         if(hitPoint < 2 && hitPoint > -2){
             ball.setVelocityY(0)
@@ -140,7 +136,6 @@ class Game extends Phaser.Scene {
         this.derecha.reset();
         clearInterval(this.ballIntervalId)
         if(this.pointsA < this.points && this.pointsB < this.points){
-            console.log(this.pointsA, this.pointsB);
             this.createBall();
             this.sound.play("start");
         }
@@ -176,7 +171,7 @@ class Game extends Phaser.Scene {
         this.physics.world.on('worldbounds', () => {
             this.sound.play("wall")
         }, this)
-        console.log(ball.body)
+
         this.physics.add.collider(ball, this.izquierda, this.chocaPala, null, this);
         this.physics.add.collider(ball, this.derecha, this.chocaPala, null, this);
         this.blockCreator.setColliders(ball);
@@ -188,14 +183,13 @@ class Game extends Phaser.Scene {
         this.startDirection = (Math.random() > 0.5) ? -1 : 1;
         this.balls = [];
         this.createBall();
-        console.log("restart game", this.pointsA, this.pointsB);
+
         this.resultMessage.setText("");
         this.continueMessage.setText("");
         this.pointsA = 0;
         this.pointsB = 0;
         this.pointsAText.setText(this.pointsA);
         this.pointsBText.setText(this.pointsB);
-        console.log("lets go", this.pointsA, this.pointsB);
     }
 
     showPaddleEffect (block) {

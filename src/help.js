@@ -6,12 +6,9 @@ class Help extends Phaser.Scene {
     }
 
     preload(){
-        console.log("help preload");
     }
 
     create(){
-        console.log("help create")
-
         const helpText = "bla bla bla bla";
 
         this.width = this.sys.game.config.width;
