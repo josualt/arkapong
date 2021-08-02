@@ -29,8 +29,10 @@ class Cinematic extends Phaser.Scene {
     this.generateWaves()
     this.stopped = false
     this.stopAnimationId = setTimeout(() => this.stopAnimation(), 4000);
+    this.stopShowOneBlockId = setTimeout(() => this.showOneBlock(), 3000);
     this.stopBlockCreatorId = setTimeout(() => this.blockCreator.wall(), 4000);
     this.stopShowTitle = setTimeout(() => this.blockCreator.showTitle(), 14000);
+    this.stopOpenMenu = setTimeout(() => this.changeToMenu(), 15000);
     this.input.keyboard.onPressCallback = function(e){console.log("key pressed", e);}
   }
 
@@ -93,6 +95,13 @@ class Cinematic extends Phaser.Scene {
     this.stopped = true
     this.ball.destroy()
   }
+
+  showOneBlock() {
+    this.add.rectangle(this.center_width, this.height -100, 16, 32, 0xff0000)
+    this.add.bitmapText(230, 430, 'squareFont', '!?', 20).setOrigin(0.5)
+    this.add.bitmapText(570, 430, 'squareFont', '!?', 20).setOrigin(0.5)
+
+  };
 }
 
 export default Cinematic
