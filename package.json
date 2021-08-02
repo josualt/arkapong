@@ -1,9 +1,13 @@
 {
   "name": "arkapong",
+  "main": "dist/index.html",
+  "build": {
+      "nwVersion": "0.54.1"
+  },
   "window": {
     "title": "ARKAPONG",
-    "width": 1042,
-    "height": 586,
+    "width": 800,
+    "height": 500,
     "fullscreen": true,
     "toolbar": true,
     "icon": "customIcon.png"
@@ -16,7 +20,9 @@
     "build": "webpack --config webpack.prod.js --env production",
     "test": "npm run lint && npm run unit",
     "lint": "eslint src/**/*.js test/**/*.js --fix",
-    "unit": "mocha test --recursive --require @babel/register -r jsdom-global/register --file test/test_setup.js"
+    "unit": "mocha test --recursive --require @babel/register -r jsdom-global/register --file test/test_setup.js",
+    "exedist": "build --tasks win-x86,win-x64,linux-x86,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ .",
+    "exestart": "run --x86 --mirror https://dl.nwjs.io/ ."
   },
   "dependencies": {
     "phaser": "^3.52.0"
@@ -40,6 +46,7 @@
     "jsdom": "^16.4.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^8.2.1",
+    "nwjs-builder-phoenix": "^1.15.0",
     "path": "^0.12.7",
     "webpack": "^5.19.0",
     "webpack-cli": "^4.4.0",
