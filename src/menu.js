@@ -18,7 +18,7 @@ class Menu extends Phaser.Scene {
     this.options = ['one player', 'two player', 'settings', 'help']
     this.scenes = ['single_player_game', 'multi_player_game', 'settings', 'help']
     this.current = 0
-    this.add.bitmapText(this.center_width, 50, 'squareFont', 'ARKAPONG', 60).setOrigin(0.5)
+    this.add.bitmapText(this.center_width, 50, 'squareFont', 'ARKAPONG.com', 60).setOrigin(0.5)
     const layer = this.add.layer()
     this.rectangle = new Phaser.GameObjects.Rectangle(this, this.center_width, 150, this.width, 40, 0xffffff).setOrigin(0.5)
     layer.add(this.rectangle)

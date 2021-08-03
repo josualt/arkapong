@@ -42,7 +42,7 @@ export default [
   {
     name: 'grey',
     color: 0x4c4c4c,
-    description: 'freez paddle'
+    description: 'freeze paddle'
   },
   {
     name: 'cyan',

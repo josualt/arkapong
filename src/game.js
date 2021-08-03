@@ -44,15 +44,16 @@ class Game extends Phaser.Scene {
     this.cursor = this.input.keyboard.createCursorKeys()
 
     this.ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
+    this.input.keyboard.on('keydown-ESC', this.escape, this)
+  }
+
+  escape () {
+    this.blockCreator.stop()
+    this.sound.play('escape')
+    this.scene.start('menu')
   }
 
   update () {
-    if (this.ESC.isDown) {
-      this.blockCreator.stop()
-      this.sound.play('escape')
-      this.scene.start('menu')
-    }
-
     if (this.pointsA === this.points || this.pointsB === this.points) {
       this.blockCreator.stop()
       this.showResult()

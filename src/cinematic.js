@@ -33,12 +33,12 @@ class Cinematic extends Phaser.Scene {
     this.stopBlockCreatorId = setTimeout(() => this.blockCreator.wall(), 4000);
     this.stopShowTitle = setTimeout(() => this.blockCreator.showTitle(), 14000);
     this.stopOpenMenu = setTimeout(() => this.changeToMenu(), 15000);
-    this.input.keyboard.onPressCallback = function(e){console.log("key pressed", e);}
+
   }
 
   update () {
     if (this.ENTER.isDown) {
-        this.changeToMenu();
+        this.changeToMenu()
     }
 
     if (!this.stopped) { this.waves.forEach((wave, i) => this.updateWave(wave, i)) }
@@ -48,6 +48,7 @@ class Cinematic extends Phaser.Scene {
     clearTimeout(this.stopAnimationId)
     clearTimeout(this.stopBlockCreatorId)
     clearTimeout(this.stopShowTitle)
+    clearTimeout(this.stopOpenMenu)
     this.blockCreator.stop()
     this.scene.start('menu')
   }
@@ -99,7 +100,7 @@ class Cinematic extends Phaser.Scene {
   showOneBlock() {
     this.add.rectangle(this.center_width, this.height -100, 16, 32, 0xff0000)
     this.add.bitmapText(230, 430, 'squareFont', '!?', 20).setOrigin(0.5)
-    this.add.bitmapText(570, 430, 'squareFont', '!?', 20).setOrigin(0.5)
+    this.add.bitmapText(570, 430, 'squareFont', 'WTF?', 20).setOrigin(0.5)
 
   };
 }

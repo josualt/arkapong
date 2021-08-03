@@ -18,6 +18,7 @@ class BlockCreator {
     this.width = this.scene.sys.game.config.width
     this.height = this.scene.sys.game.config.height
     this.center_width = this.width / 2
+    this.wallIds = []
   }
 
   generate (showEffect = false) {
@@ -72,6 +73,7 @@ class BlockCreator {
 
   stop () {
     clearInterval(this.generator)
+    this.wallIds.forEach(id => clearInterval(id))
   }
 
   setColliders (ball) {
@@ -85,6 +87,7 @@ class BlockCreator {
     this.positions = this.generatePositions(this.width / 3, this.height, (this.width / 3) - 16)
     this.blocks.forEach(block => { block.destroy() })
     this.blocks = []
+    this.wallIds = []
   }
 
   wall () {
@@ -92,7 +95,7 @@ class BlockCreator {
     positions.forEach((position, index) => {
       const [i, j] = position
       const blockType = blockTypes[Phaser.Math.Between(0, blockTypes.length - 1)]
-      setTimeout(() => this.generateBlock(blockType, i, j), index * 10)
+      this.wallIds.push(setTimeout(() => this.generateBlock(blockType, i, j), index * 10))
     })
   }
 

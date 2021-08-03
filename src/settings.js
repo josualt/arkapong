@@ -17,7 +17,7 @@ class Settings extends Phaser.Scene {
     const speedBall = this.registry.get('ballSpeed')
     const paddleSpeed = this.registry.get('paddleSpeed')
     const winScore = this.registry.get('winScore')
-    this.add.bitmapText(this.center_width, 50, 'squareFont', 'ARKAPONG', 60).setOrigin(0.5)
+    this.add.bitmapText(this.center_width, 50, 'squareFont', 'ARKAPONG.com', 60).setOrigin(0.5)
     this.add.bitmapText(this.center_width, 110, 'squareFont', 'SETTINGS', 40).setOrigin(0.5)
     this.options = []
     this.rectangles = []
