@@ -18,7 +18,7 @@ const config = {
   parent: 'contenedor',
   physics: {
     default: 'arcade',
-    debug: true
+    fps: 50
   },
   scene: [
     Bootloader,
